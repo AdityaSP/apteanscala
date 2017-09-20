@@ -1,3 +1,16 @@
+// Step 5
+
+// Entry into routes conf
+GET     /cricketers                 controllers.CricketerController.listCricketers
+
+// method for handling route
+
+def listCricketers = Action { implicit request :Request[AnyContent] =>
+    Ok(views.html.listCricketers())
+  }
+
+
+//---------------------------------------------------
 // Step 4 
 
 // Create a view called listCricketers.scala
