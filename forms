@@ -1,3 +1,7 @@
+// Error : incompatiple types of Requests because we are extending from the wrong abstract controller
+
+extends MessagesAbstractController(cc)
+
 // Error: could not find messagesrequestheader implicitly
 // we are collecting request from it from controllercomponent but we need to provide a request from messagescontrollercomponent 
 // - a more specific version of contoller component has support for i18N
