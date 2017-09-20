@@ -1,4 +1,26 @@
-// make changes to sbt
+//STEP 3 : create a file called 1.sql with the below contents
+
+# DC schema
+ 
+# --- !Ups
+
+
+CREATE TABLE CRICKETER (
+    ID integer NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    NAME varchar(255) NOT NULL,
+    RUNS integer NOT NULL
+);
+
+
+# --- !Downs
+
+DROP TABLE CRICKETER;
+
+
+
+//STEP 2: Create a folder called "evolutions" and with that create a folder called "default" and not as "evolutions.default"
+
+//STEP 1: // make changes to sbt
 name := """trial1"""
 organization := "myorg"
 
