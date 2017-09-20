@@ -1,3 +1,10 @@
+// Step 9 
+// Corresponding post call in controller
+
+def createCricketerData = Action { implicit request: Request[AnyContent] =>
+   Ok("Got a call here" + request)
+}
+
 
 // Step 8
 // create a route variable in the controller and pass it to the template
