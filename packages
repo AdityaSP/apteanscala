@@ -1,0 +1,43 @@
+/**
+  * Created by Dell lap on 9/20/2017.
+  */
+
+package one{
+
+  import one.two.three.A1
+  package two {
+    import one.two.three.A1
+
+    package three {
+      class A1{
+        val obj1 = 10
+        private val obj2 = 20
+        private[this] val obj3 = 30
+        private[two] val obj4 = 40
+        def p(other :A1) ={ obj3 + other.obj2 +  other.obj3}
+      }
+
+      class B1{
+        val obj1 = (new A1()).obj1
+        val obj2 = (new A1()).obj2
+        val obj3 = (new A1()).obj3
+        val obj4 = (new A1()).obj4
+      }
+    }
+
+    class C1{
+      val obj1 = (new A1()).obj1
+      val obj2 = (new A1()).obj2
+      val obj3 = (new A1()).obj3
+      val obj4 = (new A1()).obj4
+    }
+
+  }
+  class D1{
+    val obj1 = (new A1()).obj1
+    val obj2 = (new A1()).obj2
+    val obj3 = (new A1()).obj3
+    val obj4 = (new A1()).obj4
+  }
+
+}
