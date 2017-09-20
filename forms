@@ -1,3 +1,24 @@
+// Step 4 
+
+// Create a view called listCricketers.scala
+
+<h1>Cricketers</h1>
+
+<table>
+    <thead>
+    <tr><th>Name</th><th>Runs</th>
+    </thead>
+    <tbody>
+    @for(c <- cricketers) {
+    <tr><td>@c.name</td><td>@c.runs</td></tr>
+    }
+    </tbody>
+</table>
+
+<hr/>
+
+
+
 // Step 3
 // Dummy data to start with - Add this to your controller
 
