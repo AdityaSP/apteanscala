@@ -1,1 +1,24 @@
 
+//Step1 : Create case class and form object
+// add it in forms/CricketerForm.scala
+
+package forms
+
+
+/**
+  * Created by Dell lap on 9/19/2017.
+  */
+object CricketerForm {
+  import play.api.data.Form
+  import play.api.data.Forms._
+
+  case class CricketerData (name :String, runs :Int)
+
+  val form = Form(
+    mapping(
+      "name" -> nonEmptyText,
+      "runs" -> number(min = 0)
+    )(CricketerData.apply)(CricketerData.unapply)
+  )
+
+}
