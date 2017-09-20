@@ -1,3 +1,21 @@
+// Step 7
+Add for to my view
+
+@helper.form(postUrl) {
+    @helper.CSRF.formField
+    @helper.inputText(form("name"))
+    @helper.inputText(form("runs"))
+    <button>Create Data</button>
+}
+
+
+// Step 6
+// collect in the view like this
+@(cricketers: Seq[forms.CricketerForm.CricketerData]
+
+// pass data to the form
+Ok(views.html.listCricketers(cricketers))
+
 // Step 5
 
 // Entry into routes conf
