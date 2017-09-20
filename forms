@@ -1,7 +1,30 @@
+// bindFormRequest.get() gives an error hence
+// a better - production way of handling forms . place the below code in create post action
+
+
+val errorFunction = { formWithErrors: Form[CricketerData] =>
+
+      // This is the bad case, where the form had validation errors.
+      // Let's show the user the form again, with the errors highlighted.
+      // Note how we pass the form with errors to the template.
+      BadRequest(views.html.listCricketers(cricketers, formWithErrors, postUrl))
+    }
+
+    val successFunction = { data: CricketerData =>
+      // This is the good case, where the form was successfully parsed as a Data.
+      val cricketer = CricketerData(name = data.name, runs = data.runs)
+      cricketers.append(cricketer)
+      Redirect(routes.CricketerController.listCricketers())
+    }
+
+    val formValidationResult = form.bindFromRequest
+    formValidationResult.fold(errorFunction, successFunction)
+
+
 //Step 10
 //change your post action and add the code
 
-def createCricketerData = Action { implicit request: Request[AnyContent] =>{
+def createCricketerData = Action { implicit request: MessagesRequest[AnyContent] =>{
       cricketers.append(form.bindFromRequest.get)
       Redirect(routes.CricketerController.listCricketers())
    }
