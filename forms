@@ -1,3 +1,8 @@
+// Error request header missing implicitly provide request: MessageRequestHeader
+// implicitly provide request object
+
+(implicit request: MessagesRequestHeader)
+
 //not a member of Reverse cricket controller error because there is no corresponding entry in the routes.com and we
 // are using routes object to access the controller so make this entry into routes.conf
 
