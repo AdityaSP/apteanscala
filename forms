@@ -1,3 +1,13 @@
+//Step 10
+//change your post action and add the code
+
+def createCricketerData = Action { implicit request: Request[AnyContent] =>
+   Ok(form.bindFromRequest.get())
+}
+
+
+// Error resolving
+
 // Error : incompatiple types of Requests because we are extending from the wrong abstract controller
 
 extends MessagesAbstractController(cc)
