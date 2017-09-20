@@ -1,3 +1,16 @@
+// step 12
+// mention the global errors by putting this in your view anywhere with the form
+
+@* Global errors are not tied to any particular form field *@
+@if(form.hasGlobalErrors) {
+    @form.globalErrors.map { error: FormError =>
+    <div>
+        @error.key: @error.message
+    </div>
+    }
+}
+
+// Step 11
 // bindFormRequest.get() gives an error hence
 // a better - production way of handling forms . place the below code in create post action
 
