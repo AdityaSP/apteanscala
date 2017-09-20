@@ -1,3 +1,15 @@
+// STEP 4 : application.conf changes for DB connectivity and evolution
+
+# https://www.playframework.com/documentation/latest/Configuration
+slick.dbs.default.profile="slick.jdbc.H2Profile$"
+slick.dbs.default.db.driver=org.h2.Driver
+slick.dbs.default.db.url="jdbc:h2:mem:play;DB_CLOSE_DELAY=-1"
+//slick.dbs.default.db.user=user
+//slick.dbs.default.db.password=""
+
+//logger.application=DEBUG
+play.evolutions.db.default.autoApply=false
+
 //STEP 3 : create a file called 1.sql with the below contents
 
 # DC schema
