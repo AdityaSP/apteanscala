@@ -1,3 +1,14 @@
+
+// Step 8
+// create a route variable in the controller and pass it to the template
+private val postUrl = routes.CricketerController.createCricketerData()
+
+// corresponding change in the controller
+Ok(views.html.listCricketers(cricketers, form, postUrl))
+
+// in the view the corresponding change to pass form and postURL
+@(cricketers: Seq[forms.CricketerForm.CricketerData], form: Form[forms.CricketerForm.CricketerData], postUrl :Call)
+
 // Step 7
 Add for to my view
 
