@@ -1,3 +1,10 @@
+// Step 3
+// Dummy data to start with - Add this to your controller
+
+  private val cricketers = ArrayBuffer(
+    CricketerData("Virat Kohli", 8000),
+    CricketerData("Rahul Dravid", 12000)
+  )
 
 // Step 2 : make a copy of HomeController and name it as CricketerController
 
