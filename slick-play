@@ -1,0 +1,36 @@
+// make changes to sbt
+name := """trial1"""
+organization := "myorg"
+
+version := "1.0-SNAPSHOT"
+
+lazy val root = (project in file(".")).enablePlugins(PlayScala)
+
+scalaVersion := "2.12.3"
+routesGenerator := InjectedRoutesGenerator
+
+resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
+
+libraryDependencies ++= Seq(
+    "com.typesafe.play" %% "play-slick" % "3.0.0",
+    "com.typesafe.play" %% "play-slick-evolutions" % "3.0.0",
+    "com.typesafe.play" %% "play-json" % "2.6.0",
+    "com.h2database" % "h2" % "1.4.192",
+    specs2 % Test,
+    guice
+)
+
+libraryDependencies += guice
+libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "3.1.2" % Test
+
+resolvers += "Sonatype snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/"
+sourceDirectories in (Compile, TwirlKeys.compileTemplates) :=
+  (unmanagedSourceDirectories in Compile).value
+
+fork in run := true
+
+// Adds additional packages into Twirl
+//TwirlKeys.templateImports += "myorg.controllers._"
+
+// Adds additional packages into conf/routes
+// play.sbt.routes.RoutesKeys.routesImport += "myorg.binders._"
