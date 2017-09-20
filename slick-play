@@ -1,4 +1,15 @@
-// Add a new listing in your controller
+// STEP : 10 Add a dummy createCricketer
+
+GET     /createCricketer            controllers.CricketerController.createCricketer
+
+  def createCricketer()= Action.async { implicit rs :Request[AnyContent]=>
+
+    cricketerRepo.create("Aditya", 20000)
+      .map(id => Ok(s"cricketer $id created") )
+  }
+
+
+//STEP : 9 Add a new listing in your controller
 
 GET     /listNewCricketers          controllers.CricketerController.listNewCricketers
 
