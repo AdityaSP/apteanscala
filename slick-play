@@ -1,3 +1,13 @@
+// Add a new listing in your controller
+
+GET     /listNewCricketers          controllers.CricketerController.listNewCricketers
+
+  def listNewCricketers = Action { implicit rs :Request[AnyContent]=>
+    cricketerRepo.all
+  }
+  
+  
+
 // STEP 8 : 
 
 package models
