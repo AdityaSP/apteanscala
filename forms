@@ -1,4 +1,11 @@
 
+// Step 2 : make a copy of HomeController and name it as CricketerController
+
+@Singleton
+class CricketerController @Inject()(cc: ControllerComponents) extends AbstractController(cc) {
+}
+
+//----------------------------------------------------------
 //Step1 : Create case class and form object
 // add it in forms/CricketerForm.scala
 
