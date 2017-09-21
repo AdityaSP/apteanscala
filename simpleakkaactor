@@ -1,0 +1,45 @@
+import akka.actor.{Actor, ActorSystem, Props}
+import akka.util.Timeout
+
+/**
+  * Created by Dell lap on 9/21/2017.
+  */
+
+class BradPitt extends Actor {
+
+  override def receive: Receive = {
+    case "Dance" => sender ! "I dance Salsa to your tunes"
+    case "Sing" => sender ! "Pop"
+    case _ => sender ! "I dont know"
+  }
+}
+
+class AngelinaJolie extends Actor {
+  override def receive: Receive = {
+    case "Dance" => sender ! "I dance Salsa to your tunes"
+    case "Sing" => println("My name is Jolieee")
+    case _ => println("I dont know")
+  }
+}
+
+
+object Sept14Akka extends App{
+  import akka.pattern.ask
+  import scala.concurrent.duration._
+  import scala.concurrent.ExecutionContext.Implicits.global
+  implicit val timeout = Timeout(25 seconds)
+
+  val hollywood = ActorSystem("Hollywood")
+
+  val angelinaJolie = hollywood.actorOf(Props(new AngelinaJolie()))
+  angelinaJolie ! "Sing"
+
+  val bradPitt = hollywood.actorOf(Props(new BradPitt()))
+  val f = bradPitt ? "Sing"
+  f.map(x => print("Got this from bradpitt" + x))
+
+  val f1 = angelinaJolie ? "Dance"
+  f1.map(x => print("Got this from angelinajolie" + x))
+
+  hollywood.terminate()
+}
