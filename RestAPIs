@@ -1,3 +1,8 @@
+// STEP 5 : Get user routes
+
+GET     /users/:id                  controllers.RestController.findUserById(id: Long)
+
+
 // STEP 4 : Json Data
 
 
