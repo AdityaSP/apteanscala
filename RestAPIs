@@ -1,3 +1,8 @@
+// STEP : 9
+
+case class UserResource(email: String)
+
+
 // STEP 8: 
 
 
