@@ -1,0 +1,62 @@
+import akka.actor.{Actor, ActorRef, ActorSystem, Props}
+
+case class AddItUp(string: String)
+case class ReportMsg(marks: (Int, Int))
+
+class ClerkActor extends Actor {
+  def receive = {
+    case AddItUp(string) =>
+      {
+      }
+    case _ => println("Error: message not recognized")
+  }
+}
+
+case class StartMarksSheetProcess()
+
+class MyScorerActor(filename: String) extends Actor {
+
+  private var running = false
+  private var totalLines = 0
+  private var linesProcessed = 0
+  private var result = 0
+  private var fileSender: Option[ActorRef] = None
+
+  def receive = {
+    case StartMarksSheetProcess() => {
+      if (running) {
+        println("Warning: duplicate start message received")
+      } else {
+        running = true
+        fileSender = Some(sender) // save reference to process invoker
+        import scala.io.Source._
+        fromFile(filename).getLines.foreach { line =>
+          context.actorOf(Props[ClerkActor]) ! AddItUp(line)
+          totalLines += 1
+        }
+      }
+    }
+    case ReportMsg(marks) => {
+      println("Marks scored by " + marks)
+    }
+    case _ => println("message not recognized!")
+  }
+}
+
+object Sample extends App {
+
+  import akka.dispatch.ExecutionContexts._
+  import akka.util.Timeout
+  import scala.concurrent.duration._
+
+  override def main(args: Array[String]) {
+
+    implicit val ec = global
+    val university= ActorSystem("Universiy")
+    val actor = university.actorOf(Props(new MyScorerActor("C:\\Users\\Dell lap\\Desktop\\Python\\lnt\\mysore\\aug-16-17-18-19\\lntaug17.txt")))
+    implicit val timeout = Timeout(25 seconds)
+    actor ! StartMarksSheetProcess()
+
+
+  }
+}
