@@ -1,3 +1,19 @@
+// STEP 8: 
+
+
+  implicit val userReads = (__ \ "email").read[String](email)
+    .map(resource => UserResource(resource))
+
+
+  implicit val userWrites = new Writes[User] {
+    override def writes(user: User): JsValue = {
+      Json.obj(
+        "id" -> user.id,
+        "email" -> user.email
+      )
+    }
+  }
+
 // STEP 7 : CUrl command
 
 curl -X GET http://localhost:9000/users/0 -H "Content-Type: application/json"
