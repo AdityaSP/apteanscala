@@ -1,3 +1,16 @@
+// STEP 4 : Json Data
+
+
+  def findUserById(id: Long) = Action {
+    val user = userService.tryFindById(id)
+    if (user.isDefined) {
+      Ok(Json.toJson(List(user)))
+    } else {
+      NotFound
+    }
+  }
+  
+
 // STEP 3 : Domain user
 
 
