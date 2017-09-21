@@ -7,6 +7,8 @@ class ClerkActor extends Actor {
   def receive = {
     case AddItUp(string) =>
       {
+      ....
+      sender ! ReportMsg((a , b))
       }
     case _ => println("Error: message not recognized")
   }
