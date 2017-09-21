@@ -1,3 +1,14 @@
+// STEP 6 : Create users
+
+def createUser = Action(parse.json) {
+    request: Request[JsValue]  => {
+      val user = User(Option.empty, (request.body \ "email").as[String])
+      userService.createUser(user)
+      Created
+    }
+}
+  
+
 // STEP 5 : Get user routes
 
 GET     /users/:id                  controllers.RestController.findUserById(id: Long)
