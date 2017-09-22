@@ -1,0 +1,89 @@
+class Food{
+  override def toString: String = "Am some food"
+}
+
+class Fruit(val name: String ) extends Food {
+  override def toString: String = "Am just any Fruit" + name
+}
+
+class Apple(override val name: String) extends Fruit(name){
+  override def toString: String = "Am a type of Apple" + name
+  def appy = "Juice me"
+
+}
+
+class Mango(override val name: String) extends Fruit(name){
+  override def toString: String = "Am a type of Mango" + name
+}
+
+class desicatedMango(override val name: String) extends Mango(name){
+  override def toString: String = "Am desicated" + name
+}
+
+List[ContraVariantClass[Mango]](new ContraVariantClass[Fruit](new Fruit("App")), new ContraVariantClass[Mango](new Mango("F")))
+
+
+def isSweet[ A <: Fruit ](obj: A)= obj
+val ap1 = isSweet(new Apple("Kashmir"))
+ap1.appy
+//isSweet(new Fruit("Grapes"))
+//isSweet(new Food())
+
+def contraSweet[ A <: ContraVariantClass[Fruit]](obj: A) = obj
+//contraSweet(new ContraVariantClass(new Apple("Al")))
+
+def isSweet2(obj: Fruit) = obj
+val ap2 = isSweet2(new Apple("Kashmir"))
+//ap2.appy
+
+
+def isFresh[A >: Mango](obj: A)= obj
+isFresh(new Apple("Kashmir"))
+isFresh(new Fruit("Grapes"))
+//isSweet(new Food())
+isFresh(new desicatedMango("from Saudi"))
+
+
+//if 'Int' is subtype of 'AnyVal'
+// then List[Int] is also a subtype of List[AnyVal]
+
+
+// InvariantClass[Int] is not a subtype of InvariantClass[AnyVal]
+
+class InvariantClass[T](val someobj: T){
+  override def toString: String = someobj.toString
+}
+
+val inv1 = new InvariantClass(new Fruit("Grapes"))
+val inv2 = new InvariantClass(new Apple("Kashmir"))
+val inv3 = new InvariantClass(new Mango("Alphonso"))
+List(inv2,inv3)
+
+
+
+// Int is a subtype of AnyVal
+// that is why a CoVariantClass[Int] is a subtype of CoVariantClass[AnyVal]
+class CoVariantClass[+T](val someobj: T){
+  override def toString: String = someobj.toString
+}
+
+val cov1 = new CoVariantClass(new Fruit("Grapes"))
+val cov2 = new CoVariantClass(new Apple("Kashmir"))
+val cov3 = new CoVariantClass(new Mango("Alphonso"))
+List(cov2, cov3)
+
+
+// Int is a subtype of AnyVal
+// ContraVariantClass[AnyVal] is the subtype of ContraVariant[Int]
+class ContraVariantClass[-T](private[this] val someobj: T){
+
+}
+
+
+
+val conv1 = new ContraVariantClass(new Fruit("Grapes"))
+val conv2 = new ContraVariantClass(new Apple("Kashmir"))
+val conv3 = new ContraVariantClass(new Mango("Alphonso"))
+List(conv2, conv1, "Hello")
+List()
+
