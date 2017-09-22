@@ -1,0 +1,63 @@
+print(raw"\na\tb")  // doesnot interprest special characters
+print("a\tb")  // interprets special characters so \t becomes a tab
+raw"(\d+)\.(\d{2})".r   // .r will give us a regexp obj
+
+// find the first match only
+val priceExtractor = raw"Rs (\d+)\.(\d{2})".r
+priceExtractor.findFirstIn("Rs 2000.78")
+priceExtractor.findFirstIn("The total cost of my fit band is Rs 1000.67 and pen is Rs 78.89")
+
+// print all the matches and the groups captured
+var t = "The total cost of my fit band is Rs 1000.67 and pen is Rs 78.89"
+for (m <-priceExtractor.findAllMatchIn(t))
+  print(List(m.start,m.end, m.matched, m.group(1), m.group(2) ))
+
+// no group capturing. Only pattern matches
+for (m <-priceExtractor.findAllIn(t))
+  print(m)
+
+val p = raw"Aditya|aditya".r
+for (m <- p.findAllIn("Aditya and aditya")) print(m)
+
+// subpattern 
+t = "man eats mango"
+// match man and mango
+var manormango = raw"man|mango".r
+
+for (m <- manormango.findAllIn("man eats mango")) print(" " + m + " " )
+manormango = raw"mango|man".r
+for (m <- manormango.findAllIn("man eats mango")) print(" " + m + " " )
+manormango = raw"man(go)?".r
+
+// greedy vs lazy 
+t = "the total population now is 88. in 00 it was 99. isnt this awesome"
+var mypat = raw".+(\d+)\.".r
+for (m <- mypat.findAllIn(t)) print(" " + m + " " )
+for (m <- mypat.findAllMatchIn(t)) print(List(m.matched, m.group(1)))
+mypat = raw".+?(\d+)\.".r
+for (m <- mypat.findAllIn(t)) print(" " + m + " " )
+for (m <- mypat.findAllMatchIn(t)) print(List(m.matched, m.group(1)))
+
+
+
+val rex(rupee, paise)  = "2000.00"
+print(rupee)
+
+
+// converts a group capture to a case statement for easier extraction
+// matches only once
+// expects the whole string to match the pattern
+val rex = raw"(\d+)\.(\d{2})".r
+"2000890.56" match {
+  case rex(a,b) => println("Rs" + a +" Paise " + b)
+  case _ => "No Match"
+}
+
+// converts a group capture to a case statement for easier extraction
+// matches only once
+// the pattern can occur any where in the whole string 
+val unrex = rex.unanchored
+"The price of iphone is 2000890.56" match {
+  case unrex(a,b) => println("Rs" + a +" Paise " + b)
+  case _ => "No Match"
+}
